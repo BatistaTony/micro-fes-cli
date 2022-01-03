@@ -1,0 +1,28 @@
+{
+  "name": "create-micro-fes",
+  "version": "1.0.0",
+  "description": "A simple CLI to quick setup a micro-front-end applications",
+  "main": "src/index.js",
+  "bin": {
+    "create-micro-fes": "bin/create-mf",
+    "create-mf": "bin/create-mf"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "cli",
+    "micro-front-ends",
+    "webpack",
+    "react",
+    "config-mfes"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Batista Tony",
+  "license": "ISC",
+  "dependencies": {
+    "esm": "^3.2.25"
+  }
+}
