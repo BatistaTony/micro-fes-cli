@@ -1,11 +1,11 @@
 {
-  "name": "create-micro-fes",
+  "name": "micro-fes-cli",
   "version": "1.0.0",
   "description": "A simple CLI to quick setup a micro-front-end applications",
   "main": "src/index.js",
   "bin": {
-    "create-micro-fes": "bin/create-mf",
-    "create-mf": "bin/create-mf"
+    "micro-fes-cli": "bin/micro-fes",
+    "micro-fes": "bin/micro-fes"
   },
   "publishConfig": {
     "access": "public"
@@ -23,6 +23,8 @@
   "author": "Batista Tony",
   "license": "ISC",
   "dependencies": {
-    "esm": "^3.2.25"
+    "arg": "^5.0.1",
+    "esm": "^3.2.25",
+    "inquirer": "^8.2.0"
   }
 }
