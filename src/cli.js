@@ -1,4 +1,5 @@
 import arg from "arg";
+import inquirer from "inquirer";
 
 function parseArgsIntoOptions(rawArgs) {
   const args = arg(
@@ -6,7 +7,7 @@ function parseArgsIntoOptions(rawArgs) {
       "--create": Boolean,
       "--config": Boolean,
       "-c": "--create",
-      "--template": "Typescript" || "Javascript",
+      "--git": Boolean
     },
     {
       argv: rawArgs.slice(2),
@@ -16,13 +17,54 @@ function parseArgsIntoOptions(rawArgs) {
   return {
     create: args["--create"] || false,
     config: args["--config"] || false,
-    template: args["--template"] || "Javascript",
+    git: args["--git"] ||  false
   };
 }
 
+async function promptForMissingOptions(options) {
+  const defaultTemplate = "Javascript";
+
+  if(!options.create){
+      return {
+          ...options
+      }
+  }
+
+//   if (!options.template) {
+//     return { ...options, template: options.template || defaultTemplate };
+//   }
 
 
-export function cli(args) {
+  const questions = []
+  if(!options.template){
+      questions.push({
+          type: "list",
+          name: "template",
+          message: "Please choose a template for you application",
+          choices: ["Javascript", "Typescript"],
+          default: defaultTemplate
+      })
+  }
+
+  if(!options.git){
+    questions.push({
+        type: "confirm",
+        name: "git",
+        message: "Initialize a repository",
+        default: false
+    })
+}
+
+const answers = await inquirer.prompt(questions)
+return  {
+    ...options,
+    template: options.template  || answers.template,
+    git: options.git  || answers.git
+}
+}
+
+export async  function cli(args) {
   let options = parseArgsIntoOptions(args);
-  console.log(options);
+  const answers = await  promptForMissingOptions(options)
+  console.log(answers);
 }
